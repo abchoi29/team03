@@ -47,9 +47,9 @@ def result():
 
     # 길이가 다른 리스트도 None으로 채워서 zip하기(빈 값은 "없음"으로 채움) ------------
     if all(len(results[key]) == 0 for key in results):
-        results = False
+        results_zipped = False
     else:
-        results = results = list(itertools.zip_longest(
+        results_zipped = list(itertools.zip_longest(
         results["email"], results["person"], results["num"], results["addr"], results["card"],
         fillvalue="없음"
     ))
@@ -59,7 +59,7 @@ def result():
     if results != False:
         send_alert_email.send_alert_email(file.filename, results)
 
-    return render_template("result.html", results=results)
+    return render_template("result.html", results=results_zipped)
 
 
 if __name__ == '__main__':
